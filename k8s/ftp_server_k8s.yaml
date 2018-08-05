@@ -30,7 +30,7 @@ spec:
           postStart:
             exec:
               # FIXME change gcs bucket here  ----------------------------  VVVVVVVVVV
-              command: ["/bin/sh","-c", "mkdir /root/mountpoint && gcsfuse manual_upload_archive /root/mountpoint"]
+              command: ["/bin/sh","-c", "mkdir /root/mountpoint && gcsfuse {gcs_bucket_here} /root/mountpoint"]
           preStop:
             exec:
               command: ["fusermount", "-u", "/root/mountpoint"]
