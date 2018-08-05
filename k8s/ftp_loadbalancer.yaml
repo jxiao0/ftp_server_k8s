@@ -1,0 +1,217 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-ftp-service
+  labels:
+    app: my-ftp
+spec:
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10
+  
+  sessionAffinity: ClientIP
+  type: LoadBalancer
+  ports:
+    - port: 21
+      name: ftp
+      targetPort: 8123
+    - port: 50000
+      name: port0
+    - port: 50001
+      name: port1
+    - port: 50002
+      name: port2
+    - port: 50003
+      name: port3
+    - port: 50004
+      name: port4
+    - port: 50005
+      name: port5
+    - port: 50006
+      name: port6
+    - port: 50007
+      name: port7
+    - port: 50008
+      name: port8
+    - port: 50009
+      name: port9
+    - port: 50010
+      name: port10
+    - port: 50011
+      name: port11
+    - port: 50012
+      name: port12
+    - port: 50013
+      name: port13
+    - port: 50014
+      name: port14
+    - port: 50015
+      name: port15
+    - port: 50016
+      name: port16
+    - port: 50017
+      name: port17
+    - port: 50018
+      name: port18
+    - port: 50019
+      name: port19
+    - port: 50020
+      name: port20
+    - port: 50021
+      name: port21
+    - port: 50022
+      name: port22
+    - port: 50023
+      name: port23
+    - port: 50024
+      name: port24
+    - port: 50025
+      name: port25
+    - port: 50026
+      name: port26
+    - port: 50027
+      name: port27
+    - port: 50028
+      name: port28
+    - port: 50029
+      name: port29
+    - port: 50030
+      name: port30
+    - port: 50031
+      name: port31
+    - port: 50032
+      name: port32
+    - port: 50033
+      name: port33
+    - port: 50034
+      name: port34
+    - port: 50035
+      name: port35
+    - port: 50036
+      name: port36
+    - port: 50037
+      name: port37
+    - port: 50038
+      name: port38
+    - port: 50039
+      name: port39
+    - port: 50040
+      name: port40
+    - port: 50041
+      name: port41
+    - port: 50042
+      name: port42
+    - port: 50043
+      name: port43
+    - port: 50044
+      name: port44
+    - port: 50045
+      name: port45
+    - port: 50046
+      name: port46
+    - port: 50047
+      name: port47
+    - port: 50048
+      name: port48
+    - port: 50049
+      name: port49
+    - port: 50050
+      name: port50
+    - port: 50051
+      name: port51
+    - port: 50052
+      name: port52
+    - port: 50053
+      name: port53
+    - port: 50054
+      name: port54
+    - port: 50055
+      name: port55
+    - port: 50056
+      name: port56
+    - port: 50057
+      name: port57
+    - port: 50058
+      name: port58
+    - port: 50059
+      name: port59
+    - port: 50060
+      name: port60
+    - port: 50061
+      name: port61
+    - port: 50062
+      name: port62
+    - port: 50063
+      name: port63
+    - port: 50064
+      name: port64
+    - port: 50065
+      name: port65
+    - port: 50066
+      name: port66
+    - port: 50067
+      name: port67
+    - port: 50068
+      name: port68
+    - port: 50069
+      name: port69
+    - port: 50070
+      name: port70
+    - port: 50071
+      name: port71
+    - port: 50072
+      name: port72
+    - port: 50073
+      name: port73
+    - port: 50074
+      name: port74
+    - port: 50075
+      name: port75
+    - port: 50076
+      name: port76
+    - port: 50077
+      name: port77
+    - port: 50078
+      name: port78
+    - port: 50079
+      name: port79
+    - port: 50080
+      name: port80
+    - port: 50081
+      name: port81
+    - port: 50082
+      name: port82
+    - port: 50083
+      name: port83
+    - port: 50084
+      name: port84
+    - port: 50085
+      name: port85
+    - port: 50086
+      name: port86
+    - port: 50087
+      name: port87
+    - port: 50088
+      name: port88
+    - port: 50089
+      name: port89
+    - port: 50090
+      name: port90
+    - port: 50091
+      name: port91
+    - port: 50092
+      name: port92
+    - port: 50093
+      name: port93
+    - port: 50094
+      name: port94
+    - port: 50095
+      name: port95
+    - port: 50096
+      name: port96
+    - port: 50097
+      name: port97
+    - port: 50098
+      name: port98
+  selector:
+    app: my-ftp

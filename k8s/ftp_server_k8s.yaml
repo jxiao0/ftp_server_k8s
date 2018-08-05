@@ -1,0 +1,59 @@
+apiVersion: apps/v1beta1 # for versions before 1.6.0 use extensions/v1beta1
+kind: Deployment
+metadata:
+  name: my-ftp
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: my-ftp
+    spec:
+      volumes:
+      - name: task-pv-storage
+        persistentVolumeClaim:
+          claimName: airflow-dags
+      - name: gcs-key
+        secret:
+          secretName: gc-service-account
+          items:
+          - key: gcp_service_account_keys
+            path: gcp_service_account_keys
+      containers:
+      - name: my-ftp-container
+        securityContext:
+          privileged: true
+          capabilities:
+            add:
+              - SYS_ADMIN
+        lifecycle:
+          postStart:
+            exec:
+              # FIXME change gcs bucket here  ----------------------------  VVVVVVVVVV
+              command: ["/bin/sh","-c", "mkdir /root/mountpoint && gcsfuse manual_upload_archive /root/mountpoint"]
+          preStop:
+            exec:
+              command: ["fusermount", "-u", "/root/mountpoint"]
+        image: gcr.io/shc-price-rec-prod/ftp_server_k8s
+        imagePullPolicy: Always
+        volumeMounts:
+          - mountPath: "/root/key"
+            name: 'gcs-key'
+        env:
+          - name: GOOGLE_APPLICATION_CREDENTIALS
+            value: "/root/key/gcp_service_account_keys"
+          - name: USER
+            value: "USERNAME"         #FIXME: USERNAME
+          - name: PSWD
+            value: "PASSWD"           #FIXME: PASSWORD
+          - name: ROOT_DIR
+            value: "/root/mountpoint"
+          - name: "FTPPORT"
+            value: "8123"
+          - name: "NAT_ADDR"
+            value: "PUBLIC_ADDRESS"  #FIXME: MAKE SURE THE IP is the same as the public ip address
+          - name: "PORT_RANGE"
+            value: "50000-50099"     #FIXME: MAKE SURE THE IP RANGE IS IN THE RANGE OF LB RANGE
+          - name: "PERM"
+            value: "elradfmwMT"      #FIXME: PERMISSION [http://pyftpdlib.readthedocs.io/en/latest/api.html#pyftpdlib.authorizers.DummyAuthorizer.add_user]
+
